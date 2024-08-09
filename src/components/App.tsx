@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from '../theme/theme';

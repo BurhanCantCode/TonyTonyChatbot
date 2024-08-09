@@ -12,15 +12,20 @@ import DataUpload from './DataUpload';
 import Review from './Review';
 import ChatbotPreview from './ChatbotPreview';
 
+interface FormData {
+  salesDataContent?: any;
+  [key: string]: any;
+}
+
 const ChatbotCreator: React.FC = () => {
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<FormData>({});
   const [step, setStep] = useState(0);
 
   const handleNext = () => setStep((prevStep) => prevStep + 1);
   const handleBack = () => setStep((prevStep) => prevStep - 1);
 
   const handleUploadComplete = (data: any) => {
-    setFormData((prevData) => ({
+    setFormData((prevData: FormData) => ({
       ...prevData,
       salesDataContent: data, // Store the parsed data in formData
     }));
@@ -28,7 +33,7 @@ const ChatbotCreator: React.FC = () => {
   };
 
   const handleChange = (field: string, value: any) => {
-    setFormData((prevData) => ({
+    setFormData((prevData: FormData) => ({
       ...prevData,
       [field]: value,
     }));

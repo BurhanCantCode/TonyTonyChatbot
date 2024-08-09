@@ -4,10 +4,14 @@ import theme from '../theme/theme';
 import LandingPage from './LandingPage';
 
 function App() {
+  const handleNext = () => {
+    console.log('Next button clicked');
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <LandingPage />
+      <LandingPage onNext={handleNext} />
     </ThemeProvider>
   );
 }

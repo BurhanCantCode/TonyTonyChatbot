@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // Log the formData to check if sales data is included
     console.log('Received formData:', formData);
 
-    const prompt = `You are a customer support bot for Business Name: ${formData.businessName}, Business Info: ${formData.businessInfo}, Sales Data: ${salesDataString}; roleplay like one and answer to user queries while using the data and roleplay like humans. User query: ${input}. Respond in ${language}.`;
+    const prompt = `You are a customer support bot for Business Name: ${formData.businessName}, Business Info: ${formData.businessInfo}, Sales Data: ${salesDataString}; roleplay like one and answer to user queries while using the data and roleplay like humans. User query: ${input}. Respond in this language: ${language}.`;
 
     // Log the constructed prompt
     console.log('Constructed prompt:', prompt);

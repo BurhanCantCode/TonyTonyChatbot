@@ -39,9 +39,9 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({ formData = {}, onChange, on
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="Industry"
-            value={formData.industry || ''}
-            onChange={(e) => onChange('industry', e.target.value)}
+            label="Business Info"
+            value={formData.businessInfo || ''}
+            onChange={(e) => onChange('businessInfo', e.target.value)}
             variant="outlined"
           />
         </Grid>

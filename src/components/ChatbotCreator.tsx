@@ -11,7 +11,6 @@ import ChatbotCustomization from './ChatbotCustomization';
 import DataUpload from './DataUpload';
 import Review from './Review';
 import ChatbotPreview from './ChatbotPreview';
-import { FileUpload } from '@mui/icons-material';
 
 interface FormData {
   businessInfo: string;
@@ -46,7 +45,7 @@ const ChatbotCreator: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ backgroundColor: '#fff', color: '#000'}}>
+      <Box sx={{ backgroundColor: '#fff', color: '#000', minHeight: '100vh' }}>
         {step === 0 && <LandingPage onNext={handleNext} />}
         {step === 1 && <LoginPage onNext={handleNext} onBack={handleBack} />}
         {step === 2 && <BusinessInfo formData={formData} onChange={handleChange} onNext={handleNext} onBack={handleBack} />}

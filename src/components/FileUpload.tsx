@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Box, Typography, Button, Paper } from '@mui/material';
-import { motion } from 'framer-motion';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import React, { useState } from "react";
+import { Box, Typography, Button, Paper } from "@mui/material";
+import { motion } from "framer-motion";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { useRouter } from "next/router"; // Import useRouter from next/router
 
 interface DataUploadProps {
   formData: any;
@@ -12,9 +13,15 @@ interface DataUploadProps {
   onBack: () => void;
 }
 
-const DataUpload: React.FC<DataUploadProps> = ({ formData, onChange, onNext, onBack }) => {
+const DataUpload: React.FC<DataUploadProps> = ({
+  formData,
+  onChange,
+  onNext,
+  onBack,
+}) => {
   const [dragActive, setDragActive] = useState(false);
-  const primaryColor = '#FF4081';
+  const primaryColor = "#FF4081";
+  const router = useRouter(); // Initialize the useRouter hook
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -43,17 +50,31 @@ const DataUpload: React.FC<DataUploadProps> = ({ formData, onChange, onNext, onB
   };
 
   const handleFiles = (files: FileList) => {
-    onChange('files', Array.from(files));
+    onChange("files", Array.from(files));
+  };
+
+  const handleNext = () => {
+    onNext(); // Handle any additional logic here
+    router.push("/path-to-review"); // Replace with the actual path to your Review component
   };
 
   return (
-    <Box sx={{ maxWidth: '600px', margin: 'auto', padding: '20px' }}>
+    <Box sx={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Typography variant="h4" gutterBottom sx={{ color: primaryColor, fontWeight: 'bold', mb: 4, textAlign: 'center' }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            color: primaryColor,
+            fontWeight: "bold",
+            mb: 4,
+            textAlign: "center",
+          }}
+        >
           Upload Your Data
         </Typography>
       </motion.div>
@@ -61,13 +82,13 @@ const DataUpload: React.FC<DataUploadProps> = ({ formData, onChange, onNext, onB
         elevation={3}
         sx={{
           p: 3,
-          borderRadius: '16px',
-          border: '2px dashed',
-          borderColor: dragActive ? primaryColor : 'grey.300',
-          bgcolor: dragActive ? 'rgba(255, 64, 129, 0.05)' : 'background.paper',
-          transition: 'all 0.3s ease',
-          textAlign: 'center',
-          cursor: 'pointer'
+          borderRadius: "16px",
+          border: "2px dashed",
+          borderColor: dragActive ? primaryColor : "grey.300",
+          bgcolor: dragActive ? "rgba(255, 64, 129, 0.05)" : "background.paper",
+          transition: "all 0.3s ease",
+          textAlign: "center",
+          cursor: "pointer",
         }}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -78,10 +99,10 @@ const DataUpload: React.FC<DataUploadProps> = ({ formData, onChange, onNext, onB
           type="file"
           multiple
           onChange={handleChange}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           id="file-upload"
         />
-        <label htmlFor="file-upload" style={{ display: 'block' }}>
+        <label htmlFor="file-upload" style={{ display: "block" }}>
           <CloudUploadIcon sx={{ fontSize: 48, color: primaryColor, mb: 2 }} />
           <Typography variant="h6" gutterBottom>
             Drag and drop files here or click to upload
@@ -93,17 +114,30 @@ const DataUpload: React.FC<DataUploadProps> = ({ formData, onChange, onNext, onB
       </Paper>
       {formData && formData.files && formData.files.length > 0 && (
         <Box mt={3}>
-          <Typography variant="h6" gutterBottom>Uploaded File:</Typography>
-          <Paper elevation={1} sx={{ p: 2, borderRadius: '8px' }}>
+          <Typography variant="h6" gutterBottom>
+            Uploaded File:
+          </Typography>
+          <Paper elevation={1} sx={{ p: 2, borderRadius: "8px" }}>
             <Typography>{formData.files[0].name}</Typography>
           </Paper>
         </Box>
       )}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-        <Button onClick={onBack} variant="outlined" sx={{ color: primaryColor, borderColor: primaryColor }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
+        <Button
+          onClick={onBack}
+          variant="outlined"
+          sx={{ color: primaryColor, borderColor: primaryColor }}
+        >
           Back
         </Button>
-        <Button onClick={onNext} variant="contained" sx={{ bgcolor: primaryColor, '&:hover': { bgcolor: `${primaryColor}CC` } }}>
+        <Button
+          onClick={handleNext}
+          variant="contained"
+          sx={{
+            bgcolor: primaryColor,
+            "&:hover": { bgcolor: `${primaryColor}CC` },
+          }}
+        >
           Next
         </Button>
       </Box>

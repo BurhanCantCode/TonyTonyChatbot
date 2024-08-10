@@ -14,19 +14,23 @@ import ChatbotPreview from './ChatbotPreview';
 import { FileUpload } from '@mui/icons-material';
 
 interface FormData {
+  businessInfo: string;
+  businessName?: string;
+  industry?: string;
+  chatbotName?: string;
   salesDataContent?: any;
-  [key: string]: any;
+  [key: string]: any; // For other dynamic fields
 }
 
 const ChatbotCreator: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({});
+  const [formData, setFormData] = useState<FormData>({ businessInfo: '' });
   const [step, setStep] = useState(0);
 
   const handleNext = () => setStep((prevStep) => prevStep + 1);
   const handleBack = () => setStep((prevStep) => prevStep - 1);
 
   const handleUploadComplete = (data: any) => {
-    setFormData((prevData: FormData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       salesDataContent: data, // Store the parsed data in formData
     }));
@@ -34,7 +38,7 @@ const ChatbotCreator: React.FC = () => {
   };
 
   const handleChange = (field: string, value: any) => {
-    setFormData((prevData: FormData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       [field]: value,
     }));

@@ -27,17 +27,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { input, formData } = req.body;
 
-    // Convert sales data array to a string
-    const salesDataString = Array.isArray(formData.salesDataContent)
-      ? formData.salesDataContent.map((item: any) => {
-          return `Date: ${item.date}, Product: ${item.product}, Amount: ${item.amount}`;
-        }).join('; ')
-      : formData.salesDataContent; // If it's a string (PDF text), use it directly
+// Convert sales data array to a string
+const salesDataString = Array.isArray(formData?.salesDataContent)
+  ? formData.salesDataContent.map((item: any) => {
+      return `Date: ${item.date}, Product: ${item.product}, Amount: ${item.amount}`;
+    }).join('; ')
+  : formData?.salesDataContent || ''; // If it's a string (PDF text), use it directly or default to an empty string
 
     // Log the formData to check if sales data is included
     console.log('Received formData:', formData);
 
-    const prompt = `You are a customer support bot for Business Name: ${formData.businessName}, Business Info: ${formData.businessInfo}, Sales Data: ${salesDataString}; roleplay like one and answer to user queries while using the data and roleplay like humans. User query: ${input}`;
+    const prompt = `You are a customer support bot(roleplay like one and answer to user queries while using the data and roleplay like humans if u dont know the answer u can make your own engage in conversations) for Business Name: ${formData.businessName}, Business Info: ${formData.businessInfo}, Sales Data: ${salesDataString}; roleplay like one and answer to user queries while using the data and roleplay like humans if u dont know the answer u can make your own engage in conversations. User query: ${input} `;
 
     // Log the constructed prompt
     console.log('Constructed prompt:', prompt);

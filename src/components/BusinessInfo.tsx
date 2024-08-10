@@ -70,16 +70,14 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Industry"
-              value={formData.industry || ""}
-              onChange={(e) => onChange("industry", e.target.value)}
+              label="Business Info"
+            value={formData.businessInfo || ''}
+            onChange={(e) => onChange('businessInfo', e.target.value)}
               variant="outlined"
             />
           </Grid>
         </Grid>
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
-          <Button
-            onClick={onBack}
+
             variant="outlined"
             sx={{
               color: "black",

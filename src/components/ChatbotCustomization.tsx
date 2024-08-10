@@ -1,9 +1,11 @@
-import React from "react";
-import { TextField, Box, Typography, Grid, Button, Paper } from "@mui/material";
-import { motion } from "framer-motion";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import ColorLensIcon from "@mui/icons-material/ColorLens";
-import MessageIcon from "@mui/icons-material/Message";
+'use client';
+
+import React from 'react';
+import { TextField, Box, Typography, Grid, Button, Paper, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { motion } from 'framer-motion';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+import MessageIcon from '@mui/icons-material/Message';
 
 interface ChatbotCustomizationProps {
   formData: any;
@@ -12,12 +14,7 @@ interface ChatbotCustomizationProps {
   onBack: () => void;
 }
 
-const ChatbotCustomization: React.FC<ChatbotCustomizationProps> = ({
-  formData = {},
-  onChange,
-  onNext,
-  onBack,
-}) => {
+const ChatbotCustomization: React.FC<ChatbotCustomizationProps> = ({ formData = {}, onChange, onNext, onBack }) => {
   const previewPrimaryColor = formData.primaryColor || "#333333";
 
   return (
@@ -122,6 +119,33 @@ const ChatbotCustomization: React.FC<ChatbotCustomizationProps> = ({
                   ),
                 }}
               />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: 3,
+                borderRadius: "16px",
+                height: "100%",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <FormControl fullWidth variant="outlined">
+                <InputLabel id="language-select-label">Language</InputLabel>
+                <Select
+                  labelId="language-select-label"
+                  value={formData.language || ''}
+                  onChange={(e) => onChange('language', e.target.value)}
+                  label="Language"
+                >
+                  <MenuItem value="en">English</MenuItem>
+                  <MenuItem value="es">Spanish</MenuItem>
+                  <MenuItem value="fr">French</MenuItem>
+                  <MenuItem value="de">German</MenuItem>
+                  <MenuItem value="zh">Chinese</MenuItem>
+                </Select>
+              </FormControl>
             </Paper>
           </Grid>
         </Grid>

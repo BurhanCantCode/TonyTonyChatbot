@@ -55,7 +55,7 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
                 Business Information
               </Typography>
               <Typography>Name: {formData.businessName || "N/A"}</Typography>
-              <Typography>Industry: {formData.industry || "N/A"}</Typography>
+              <Typography>Business Information: {formData.businessInfo || "N/A"}</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={6}>

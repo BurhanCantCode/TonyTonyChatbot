@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 // import React from 'react';
 // //import logo from './logo.svg';
 // import './App.css';

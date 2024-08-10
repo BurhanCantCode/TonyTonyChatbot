@@ -70,7 +70,7 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Business Info"
+              label="Business Information"
               value={formData.businessInfo || ""}
               onChange={(e) => onChange("businessInfo", e.target.value)}
               variant="outlined"

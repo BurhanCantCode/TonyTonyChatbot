@@ -56,14 +56,19 @@ const DataUpload: React.FC<DataUploadProps> = ({
       <Typography
         variant="h4"
         gutterBottom
-        sx={{ mb: 2, color: "black", fontWeight: "bold" }}
+        sx={{ mb: 4, color: "black", fontWeight: "bold" }}
       >
         Upload Data
       </Typography>
       <input
         type="file"
         onChange={handleFileChange}
-        style={{ marginBottom: 16 }}
+        style={{
+          marginBottom: 16,
+          padding: "10px",
+          border: "1px solid #ddd",
+          borderRadius: "4px",
+        }}
       />
       <Button
         onClick={handleUpload}
@@ -77,6 +82,8 @@ const DataUpload: React.FC<DataUploadProps> = ({
           color: "white",
           "&:hover": { bgcolor: "#333333CC" },
           borderRadius: "16px",
+          mb: 2, // Margin bottom to separate from other elements
+          width: "150px", // Set fixed width for the button
         }}
       >
         {loading ? "Uploading..." : "Upload"}
@@ -85,7 +92,6 @@ const DataUpload: React.FC<DataUploadProps> = ({
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          mt: 2,
           width: "100%",
           maxWidth: "500px",
         }}
@@ -97,6 +103,8 @@ const DataUpload: React.FC<DataUploadProps> = ({
             color: "black",
             borderColor: "black",
             borderRadius: "16px",
+            width: "100px", // Set fixed width for the button
+            mr: 1, // Margin right to separate from the next button
           }}
         >
           Back
@@ -110,6 +118,8 @@ const DataUpload: React.FC<DataUploadProps> = ({
             color: "white",
             "&:hover": { bgcolor: "#333333CC" },
             borderRadius: "16px",
+            width: "100px", // Set fixed width for the button
+            ml: 1, // Margin left to separate from the previous button
           }}
         >
           Next

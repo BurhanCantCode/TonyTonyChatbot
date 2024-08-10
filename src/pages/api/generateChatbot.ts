@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { AzureOpenAI } from 'openai'; // Correct import
+import { AzureOpenAI } from 'openai';
 
 const azureOpenAIEndpoint = process.env.AZURE_OPENAI_ENDPOINT;
 const apiKey = process.env.AZURE_OPENAI_API_KEY;
@@ -26,6 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const { input, formData } = req.body;
+    const { language } = formData;
 
     // Convert sales data array to a string
     const salesDataString = formData.salesDataContent.map((item: any) => {
@@ -35,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // Log the formData to check if sales data is included
     console.log('Received formData:', formData);
 
-    const prompt = `You are a customer support bot for Business Name: ${formData.businessName}, Business Info: ${formData.businessInfo}, Sales Data: ${salesDataString}; roleplay like one and answer to user queries while using the data and roleplay like humans. User query: ${input}`;
+    const prompt = `You are a customer support bot for Business Name: ${formData.businessName}, Business Info: ${formData.businessInfo}, Sales Data: ${salesDataString}; roleplay like one and answer to user queries while using the data and roleplay like humans. User query: ${input}. Respond in ${language}.`;
 
     // Log the constructed prompt
     console.log('Constructed prompt:', prompt);

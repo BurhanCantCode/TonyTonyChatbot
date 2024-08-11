@@ -22,10 +22,12 @@ const DataUpload: React.FC<DataUploadProps> = ({
 }) => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [uploadComplete, setUploadComplete] = useState(false); // State to track if upload is complete
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setFile(event.target.files[0]);
+      setUploadComplete(false); // Reset upload complete state when a new file is selected
     }
   };
 
@@ -36,6 +38,7 @@ const DataUpload: React.FC<DataUploadProps> = ({
     try {
       const data = await parseCSV(file);
       setLoading(false);
+      setUploadComplete(true); // Set upload complete state to true
       onUploadComplete(data, [file]);
     } catch (error) {
       console.error("Error parsing CSV file:", error);
@@ -166,7 +169,7 @@ const DataUpload: React.FC<DataUploadProps> = ({
             <Button
               onClick={onNext}
               variant="contained"
-              disabled={loading}
+              disabled={!uploadComplete || loading} // Disable Next button until upload is complete
               sx={{
                 bgcolor: "black",
                 color: "white",

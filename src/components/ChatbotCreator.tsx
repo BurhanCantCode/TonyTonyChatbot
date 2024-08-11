@@ -11,6 +11,7 @@ import ChatbotCustomization from './ChatbotCustomization';
 import DataUpload from './DataUpload';
 import Review from './Review';
 import ChatbotPreview from './ChatbotPreview';
+import { Analytics } from "@vercel/analytics/react"
 
 interface FormData {
   businessInfo: string;
@@ -18,8 +19,6 @@ interface FormData {
   industry?: string;
   chatbotName?: string;
   salesDataContent?: any;
-  files?: File[];
-  language?: string;
   [key: string]: any; // For other dynamic fields
 }
 
@@ -30,11 +29,10 @@ const ChatbotCreator: React.FC = () => {
   const handleNext = () => setStep((prevStep) => prevStep + 1);
   const handleBack = () => setStep((prevStep) => prevStep - 1);
 
-  const handleUploadComplete = (data: any, files: File[]) => {
+  const handleUploadComplete = (data: any) => {
     setFormData((prevData) => ({
       ...prevData,
       salesDataContent: data, // Store the parsed data in formData
-      files: files, // Store the uploaded files in formData
     }));
     handleNext();
   };
@@ -53,7 +51,7 @@ const ChatbotCreator: React.FC = () => {
         {step === 1 && <LoginPage onNext={handleNext} onBack={handleBack} />}
         {step === 2 && <BusinessInfo formData={formData} onChange={handleChange} onNext={handleNext} onBack={handleBack} />}
         {step === 3 && <ChatbotCustomization formData={formData} onChange={handleChange} onNext={handleNext} onBack={handleBack} />}
-        {step === 4 && <DataUpload formData={formData} onUploadComplete={handleUploadComplete} onNext={handleNext} onBack={handleBack} />}
+        {step === 4 && <DataUpload formData={formData} onUploadComplete={handleUploadComplete} onNext={handleNext} onBack={handleBack} />} {/* Pass onNext and onBack */}
         {step === 5 && <Review formData={formData} onNext={handleNext} onBack={handleBack} />}
         {step === 6 && <ChatbotPreview formData={formData} onBack={handleBack} />}
       </Box>

@@ -27,8 +27,21 @@ interface Message {
   text: string;
 }
 
-const ChatbotPreview: React.FC<ChatbotPreviewProps> = ({ formData, onBack }) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+const ChatbotPreview: React.FC<ChatbotPreviewProps> = ({
+  formData,
+  onBack,
+}) => {
+  const [messages, setMessages] = useState([
+    {
+      sender: "bot",
+      text: formData.welcomeMessage || "Hello! How can I help you today?",
+    },
+  ]);
+
+
+
+
+
   const [input, setInput] = useState("");
   const [showPrompts, setShowPrompts] = useState(true);
   const [samplePrompts, setSamplePrompts] = useState(["What were my sales on 2nd March, 2024?", "Can you provide details on market trends?", "Can you help me with my sales management?"]);

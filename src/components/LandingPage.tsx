@@ -103,7 +103,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ formData = {}, onNext }) => {
                 alt="Chatbot Screenshot"
                 style={{
                   width: "100%",
-                  maxWidth: "400px", // Reduce the width on larger screens
+                  maxWidth: "500px", // Increase the max width to make the image bigger
                   borderRadius: "8px",
                   padding: "20px",
                 }}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Box, Typography, Grid, Button, Paper } from "@mui/material";
 import { motion } from "framer-motion";
 
@@ -15,11 +15,19 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({
   onNext,
   onBack,
 }) => {
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    // Check if all required fields are filled
+    const isValid = formData.businessName && formData.industry && formData.businessInfo;
+    setIsFormValid(isValid);
+  }, [formData]);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <Box
         sx={{
@@ -34,9 +42,9 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({
       >
         <Box sx={{ maxWidth: "600px", width: "100%" }}>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <Typography
               variant="h4"
@@ -103,6 +111,7 @@ const BusinessInfo: React.FC<BusinessInfoProps> = ({
                   borderRadius: "16px",
                   fontWeight: 700,
                 }}
+                disabled={!isFormValid} // Disable Next button until form is valid
               >
                 Next
               </Button>

@@ -22,8 +22,13 @@ interface ChatbotPreviewProps {
   onBack: () => void;
 }
 
+interface Message {
+  sender: string;
+  text: string;
+}
+
 const ChatbotPreview: React.FC<ChatbotPreviewProps> = ({ formData, onBack }) => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [showPrompts, setShowPrompts] = useState(true);
   const [samplePrompts, setSamplePrompts] = useState(["Hello", "Help", "Info"]);
@@ -35,7 +40,7 @@ const ChatbotPreview: React.FC<ChatbotPreviewProps> = ({ formData, onBack }) => 
     const newMessages = [...messages, { sender: "user", text: input }];
     setMessages(newMessages);
     setInput("");
-    const response = await generateChatbotResponse(input);
+    const response = await generateChatbotResponse(input, formData); // Pass formData as the second argument
     setMessages([...newMessages, { sender: "bot", text: response }]);
   };
 

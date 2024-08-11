@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography, Paper } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload"; // Import CloudDownloadIcon
 import { parseCSV } from "../utils/csvParser";
+import { motion } from "framer-motion";
 
 interface DataUploadProps {
   formData: any;
@@ -53,125 +54,135 @@ const DataUpload: React.FC<DataUploadProps> = ({
   };
 
   return (
-    <Box
-      sx={{
-        padding: 3,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        minHeight: "100vh",
-        justifyContent: "center",
-        bgcolor: "#F5F5F5",
-      }}
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <Box
         sx={{
-          width: "100%",
-          maxWidth: "500px",
-          bgcolor: "white",
-          padding: 4,
-          borderRadius: "16px",
-          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-          textAlign: "center",
+          padding: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          minHeight: "100vh",
+          justifyContent: "center",
+          bgcolor: "#F5F5F5",
         }}
       >
-        <Typography
-          variant="h4"
-          gutterBottom
-          sx={{ mb: 4, color: "black", fontWeight: "bold" }}
-        >
-          Upload Data
-        </Typography>
-        <input
-          type="file"
-          onChange={handleFileChange}
-          style={{
-            marginBottom: 16,
-            padding: "10px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            width: "100%",
-          }}
-        />
-        <Box
+        <Paper
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 2,
-            marginBottom: 4,
-          }}
-        >
-          <Button
-            onClick={handleUpload}
-            disabled={loading}
-            startIcon={
-              loading ? <CircularProgress size={20} /> : <CloudUploadIcon />
-            }
-            variant="contained"
-            sx={{
-              bgcolor: "black",
-              color: "white",
-              "&:hover": { bgcolor: "#333333CC" },
-              borderRadius: "16px",
-              width: "120px",
-            }}
-          >
-            {loading ? "Uploading..." : "Upload"}
-          </Button>
-          <Button
-            onClick={handleDownloadSample}
-            variant="contained" // Use contained variant to match the style
-            startIcon={<CloudDownloadIcon />} // Add the CloudDownloadIcon here
-            sx={{
-              bgcolor: "black",
-              color: "white",
-              "&:hover": { bgcolor: "#333333CC" },
-              borderRadius: "16px",
-              width: "180px",
-            }}
-          >
-            Sample Data
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
             width: "100%",
             maxWidth: "500px",
+            bgcolor: "white",
+            padding: 4,
+            borderRadius: 4, // Increased border radius for more curved edges
+            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)", // Increased shadow
+            textAlign: "center",
           }}
         >
-          <Button
-            onClick={onBack}
-            variant="outlined"
+          <Typography
+            variant="h4"
+            gutterBottom
+            sx={{ mb: 4, color: "black", fontWeight: 600 }} // Slightly bold
+          >
+            Upload Data
+          </Typography>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            style={{
+              marginBottom: 16,
+              padding: "10px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              width: "100%",
+            }}
+          />
+          <Box
             sx={{
-              color: "black",
-              borderColor: "black",
-              borderRadius: "16px",
-              width: "80px",
-              mr: 1,
+              display: "flex",
+              justifyContent: "center",
+              gap: 2,
+              marginBottom: 4,
             }}
           >
-            Back
-          </Button>
-          <Button
-            onClick={onNext}
-            variant="contained"
-            disabled={loading}
+            <Button
+              onClick={handleUpload}
+              disabled={loading}
+              startIcon={
+                loading ? <CircularProgress size={20} /> : <CloudUploadIcon />
+              }
+              variant="contained"
+              sx={{
+                bgcolor: "black",
+                color: "white",
+                "&:hover": { bgcolor: "#333333CC" },
+                borderRadius: "16px",
+                width: "120px",
+                fontWeight: 600, // Slightly bold
+              }}
+            >
+              {loading ? "Uploading..." : "Upload"}
+            </Button>
+            <Button
+              onClick={handleDownloadSample}
+              variant="contained" // Use contained variant to match the style
+              startIcon={<CloudDownloadIcon />} // Add the CloudDownloadIcon here
+              sx={{
+                bgcolor: "black",
+                color: "white",
+                "&:hover": { bgcolor: "#333333CC" },
+                borderRadius: "16px",
+                width: "180px",
+                fontWeight: 600, // Slightly bold
+              }}
+            >
+              Sample Data
+            </Button>
+          </Box>
+          <Box
             sx={{
-              bgcolor: "black",
-              color: "white",
-              "&:hover": { bgcolor: "#333333CC" },
-              borderRadius: "16px",
-              width: "80px",
-              ml: 1,
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+              maxWidth: "500px",
             }}
           >
-            Next
-          </Button>
-        </Box>
+            <Button
+              onClick={onBack}
+              variant="outlined"
+              sx={{
+                color: "black",
+                borderColor: "black",
+                borderRadius: "16px",
+                width: "80px",
+                mr: 1,
+                fontWeight: 600, // Slightly bold
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              onClick={onNext}
+              variant="contained"
+              disabled={loading}
+              sx={{
+                bgcolor: "black",
+                color: "white",
+                "&:hover": { bgcolor: "#333333CC" },
+                borderRadius: "16px",
+                width: "80px",
+                ml: 1,
+                fontWeight: 600, // Slightly bold
+              }}
+            >
+              Next
+            </Button>
+          </Box>
+        </Paper>
       </Box>
-    </Box>
+    </motion.div>
   );
 };
 

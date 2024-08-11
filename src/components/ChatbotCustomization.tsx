@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Box, Typography, Grid, Button, Paper, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { motion } from 'framer-motion';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -15,6 +15,13 @@ interface ChatbotCustomizationProps {
 
 const ChatbotCustomization: React.FC<ChatbotCustomizationProps> = ({ formData = {}, onChange, onNext, onBack }) => {
   const primaryColor = formData.primaryColor || "black"; // Default to black if formData.primaryColor is not set
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    // Check if all required fields are filled
+    const isValid = formData.chatbotName && formData.primaryColor && formData.welcomeMessage && formData.language;
+    setIsFormValid(isValid);
+  }, [formData]);
 
   return (
     <motion.div
@@ -118,7 +125,7 @@ const ChatbotCustomization: React.FC<ChatbotCustomizationProps> = ({ formData = 
               <Button onClick={onBack} variant="outlined" sx={{ color: "black", borderColor: "black", borderRadius: '16px', fontWeight: 700 }}>
                 Back
               </Button>
-              <Button onClick={onNext} variant="contained" sx={{ bgcolor: "black", '&:hover': { bgcolor: `${"black"}CC` }, borderRadius: '16px', fontWeight: 700 }}>
+              <Button onClick={onNext} variant="contained" sx={{ bgcolor: "black", '&:hover': { bgcolor: `${"black"}CC` }, borderRadius: '16px', fontWeight: 700 }} disabled={!isFormValid}>
                 Next
               </Button>
             </Box>

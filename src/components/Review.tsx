@@ -20,15 +20,26 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "100vh",
+        minHeight: "100vh", // Ensure it takes full viewport height
+        width: "100vw",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: "20px",
+        boxSizing: "border-box",
+        backgroundColor: "white", // Optional: add background color for contrast
       }}
     >
-      <Box sx={{ maxWidth: "800px", width: "100%" }}>
+      <Box
+        sx={{
+          maxWidth: "700px",
+
+          width: "100%",
+
+          padding: "20px", // Added padding inside the container
+         
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -42,6 +53,7 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
               fontWeight: "bold",
               mb: 4,
               textAlign: "center",
+              fontSize: { xs: "1.8rem", sm: "2rem", md: "2.5rem" },
             }}
           >
             Review Your Chatbot
@@ -52,7 +64,7 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
             <Paper
               elevation={3}
               sx={{
-                p: 3,
+                p: { xs: 2, sm: 3 },
                 borderRadius: "16px",
                 boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
               }}
@@ -62,14 +74,16 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
               </Typography>
               <Typography>Name: {formData.businessName || "N/A"}</Typography>
               <Typography>Industry: {formData.industry || "N/A"}</Typography>
-              <Typography>Business Information: {formData.businessInfo || "N/A"}</Typography>
+              <Typography>
+                Business Information: {formData.businessInfo || "N/A"}
+              </Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={6}>
             <Paper
               elevation={3}
               sx={{
-                p: 3,
+                p: { xs: 2, sm: 3 },
                 borderRadius: "16px",
                 boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
               }}
@@ -78,15 +92,19 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
                 Chatbot Customization
               </Typography>
               <Typography>Name: {formData.chatbotName || "N/A"}</Typography>
-              <Typography>Primary Color: {formData.primaryColor || "N/A"}</Typography>
-              <Typography>Welcome Message: {formData.welcomeMessage || "N/A"}</Typography>
+              <Typography>
+                Primary Color: {formData.primaryColor || "N/A"}
+              </Typography>
+              <Typography>
+                Welcome Message: {formData.welcomeMessage || "N/A"}
+              </Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={6}>
             <Paper
               elevation={3}
               sx={{
-                p: 3,
+                p: { xs: 2, sm: 3 },
                 borderRadius: "16px",
                 boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
               }}
@@ -101,7 +119,7 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
             <Paper
               elevation={3}
               sx={{
-                p: 3,
+                p: { xs: 2, sm: 3 },
                 borderRadius: "16px",
                 boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
               }}
@@ -121,13 +139,22 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
             </Paper>
           </Grid>
         </Grid>
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between", // Changed to space-between for better alignment
+            mt: 4,
+          }}
+        >
           <Button
             onClick={onBack}
             variant="outlined"
             sx={{
               color: "black",
               borderColor: "black",
+              borderRadius: "16px",
+              width: "80px",
+              fontWeight: 600, // Slightly bold
             }}
           >
             Back
@@ -137,9 +164,11 @@ const Review: React.FC<ReviewProps> = ({ formData = {}, onNext, onBack }) => {
             variant="contained"
             sx={{
               bgcolor: "black",
-              "&:hover": {
-                bgcolor: "#333333CC",
-              },
+              color: "white",
+              "&:hover": { bgcolor: "#333333CC" },
+              borderRadius: "16px",
+              width: "80px",
+              fontWeight: 600, // Slightly bold
             }}
           >
             Next

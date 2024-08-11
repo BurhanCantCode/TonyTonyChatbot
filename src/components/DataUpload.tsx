@@ -3,11 +3,12 @@
 import React, { useState } from "react";
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload"; // Import CloudDownloadIcon
 import { parseCSV } from "../utils/csvParser";
 
 interface DataUploadProps {
   formData: any;
-  onUploadComplete: (data: any, files: File[]) => void; // Pass the parsed data and files to the parent component
+  onUploadComplete: (data: any, files: File[]) => void;
   onNext: () => void;
   onBack: () => void;
 }
@@ -34,11 +35,21 @@ const DataUpload: React.FC<DataUploadProps> = ({
     try {
       const data = await parseCSV(file);
       setLoading(false);
-      onUploadComplete(data, [file]); // Pass the parsed data and files to the parent component
+      onUploadComplete(data, [file]);
     } catch (error) {
       console.error("Error parsing CSV file:", error);
       setLoading(false);
     }
+  };
+
+  const handleDownloadSample = () => {
+    const zipUrl = "https://drive.google.com/uc?export=download&id=14xVVm6qDusbmpDnYBW3R2RRYM5oR26sM"; // Replace with your Google Drive ZIP file ID
+    const link = document.createElement("a");
+    link.href = zipUrl;
+    link.setAttribute("download", "sample-data.zip"); // Name the downloaded file as "sample-data.zip"
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   };
 
   return (
@@ -82,25 +93,46 @@ const DataUpload: React.FC<DataUploadProps> = ({
             width: "100%",
           }}
         />
-        <Button
-          onClick={handleUpload}
-          disabled={loading}
-          startIcon={
-            loading ? <CircularProgress size={20} /> : <CloudUploadIcon />
-          }
-          variant="contained"
+        <Box
           sx={{
-            bgcolor: "black",
-            color: "white",
-            "&:hover": { bgcolor: "#333333CC" },
-            borderRadius: "16px",
-            mb: 2,
-            width: "100%",
-            maxWidth: "120px",
+            display: "flex",
+            justifyContent: "center",
+            gap: 2,
+            marginBottom: 4,
           }}
         >
-          {loading ? "Uploading..." : "Upload"}
-        </Button>
+          <Button
+            onClick={handleUpload}
+            disabled={loading}
+            startIcon={
+              loading ? <CircularProgress size={20} /> : <CloudUploadIcon />
+            }
+            variant="contained"
+            sx={{
+              bgcolor: "black",
+              color: "white",
+              "&:hover": { bgcolor: "#333333CC" },
+              borderRadius: "16px",
+              width: "120px",
+            }}
+          >
+            {loading ? "Uploading..." : "Upload"}
+          </Button>
+          <Button
+            onClick={handleDownloadSample}
+            variant="contained" // Use contained variant to match the style
+            startIcon={<CloudDownloadIcon />} // Add the CloudDownloadIcon here
+            sx={{
+              bgcolor: "black",
+              color: "white",
+              "&:hover": { bgcolor: "#333333CC" },
+              borderRadius: "16px",
+              width: "180px",
+            }}
+          >
+            Sample Data
+          </Button>
+        </Box>
         <Box
           sx={{
             display: "flex",
